@@ -9,8 +9,8 @@ fnn=${fn%.*}
 
 mkdir -p src
 cat >src/${fnn}.hs <<EOL
-import System.Environment
-import System.Exit
+import System.Environment (getArgs)
+import System.Exit (exitFailure)
 
 solve = id
 
