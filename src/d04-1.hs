@@ -1,4 +1,3 @@
-{- HLINT ignore "Use tuple-section" -}
 import Data.Complex
 import Data.HashMap.Lazy (HashMap)
 import Data.HashMap.Lazy qualified as Map
@@ -19,21 +18,19 @@ toGrid =
     . filter (not . null)
     . lines
 
+{- ORMOLU_DISABLE -}
 neighbourCoords =
-  [ (-1) :+ (-1),
-    0 :+ (-1),
-    1 :+ (-1),
-    (-1) :+ 0 {-  it me  -},
-    1 :+ 0,
-    (-1) :+ 1,
-    0 :+ 1,
-    1 :+ 1
+  [
+    (-1) :+ (-1),  0 :+ (-1),  1 :+ (-1),
+    (-1) :+   0 ,              1 :+   0 ,
+    (-1) :+   1 ,  0 :+   1,   1 :+   1
   ]
+{- ORMOLU_ENABLE -}
 
 neighbours :: Coord -> Grid -> [(Coord, Char)]
 neighbours c g =
   mapMaybe
-    (\n -> fmap (\v -> (c + n, v)) (g Map.!? (c + n)))
+    (\n -> fmap (c + n,) (g Map.!? (c + n)))
     neighbourCoords
 
 mapNeighbours :: Char -> Coord -> Grid -> Maybe [(Coord, Char)]
@@ -42,7 +39,6 @@ mapNeighbours '@' c g = Just rolls
     rolls = (filter ((== '@') . snd) . neighbours c) g
 mapNeighbours _ _ _ = Nothing
 
--- solve :: String -> Int
 solve s =
   ( length
       . filter ((< 4) . length)
@@ -54,7 +50,6 @@ solve s =
   where
     g = toGrid s
 
-parse :: [FilePath] -> IO String
 parse [] = putStrLn "Input file not specified" >> exitFailure
 parse (f : _) = readFile f
 

@@ -1,5 +1,5 @@
-import System.Environment
-import System.Exit
+import System.Environment (getArgs)
+import System.Exit (exitFailure)
 
 add ('L' : xs) value = (value - read xs) `mod` 100
 add ('R' : xs) value = (value + read xs) `mod` 100

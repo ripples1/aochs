@@ -1,4 +1,3 @@
-{- HLINT ignore "Use tuple-section" -}
 import Data.Complex
 import Data.HashMap.Lazy (HashMap)
 import Data.HashMap.Lazy qualified as Map
@@ -33,7 +32,7 @@ neighbourCoords =
 neighbours :: Coord -> Grid -> [(Coord, Char)]
 neighbours c g =
   mapMaybe
-    (\n -> fmap (\v -> (c + n, v)) (g Map.!? (c + n)))
+    (\n -> fmap (c + n,) (g Map.!? (c + n)))
     neighbourCoords
 
 accessibleRolls :: Char -> Coord -> Grid -> Maybe [(Coord, Char)]

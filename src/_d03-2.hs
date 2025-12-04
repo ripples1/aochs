@@ -1,4 +1,4 @@
-import Control.Monad (foldM)
+{- import Control.Monad (foldM)
 import Data.Bifunctor (first)
 import Data.Map (Map)
 import Data.Map qualified as Map
@@ -25,3 +25,4 @@ parse [] = putStrLn "Input file not specified" >> exitFailure
 parse (f : _) = readFile f
 
 main = getArgs >>= parse >>= print . solve
+ -}
